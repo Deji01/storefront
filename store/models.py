@@ -16,6 +16,7 @@ class Product(models.Model):
     last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(Collection, on_delete=models.PROTECT)
     promotions = models.ManyToManyField(Promotion)
+    slug = models.SlugField(default='-')
 
 class Customer(models.Model):
     MEMBERSHIP_BRONZE = 'B'
