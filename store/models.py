@@ -2,7 +2,7 @@ from django.db import models
 
 class Collection(models.Model):
     title = models.CharField(max_length=255)
-    
+
 class Product(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -40,7 +40,8 @@ class Order(models.Model):
         ]
     placed_at = models.DateTimeField(auto_now_add=True)
     payment_status = models.CharField(max_length=1, choices=PAYMENT_STATUS_CHOICES, default=PAYMENT_STATUS_PENDING)
-
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
+    
 class Address(models.Model):
     street = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
