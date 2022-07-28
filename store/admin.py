@@ -1,4 +1,4 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.db.models import Count
 from django.utils.html import format_html
 from django.utils.http import urlencode
@@ -81,7 +81,7 @@ class ProductAdmin(admin.ModelAdmin):
         updated_count = queryset.update(inventory=0)
         self.message_user(
             request, 
-            f'{updated_count} products were successfully updated'
+            f'{updated_count} products were successfully updated', messages.ERROR
         )
 
 @admin.register(models.Order)
