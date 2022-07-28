@@ -29,10 +29,11 @@ class CollectionAdmin(admin.ModelAdmin):
 
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
+    search_fields = ['first_name__istartswith', 'last_name__istartswith']
     list_display = ['first_name', 'last_name', 'membership']
     list_editable = ['memebership']
-    ordering = ['first_name', 'last_name']
     list_per_page = 10
+    ordering = ['first_name', 'last_name']
 
     @admin.display(ordering='orders_count')
     def orders(self, customer):
