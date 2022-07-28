@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db.models import Count
 from django.utils.html import format_html
-from django.utils.html import urlencode
+from django.utils.http import urlencode
 from django.urls import reverse
 from . import models
 
@@ -33,6 +33,19 @@ class CustomerAdmin(admin.ModelAdmin):
     list_editable = ['memebership']
     ordering = ['first_name', 'last_name']
     list_per_page = 10
+
+    @admin.display(ordering='orders_count')
+    def orders(self, customer):
+        url = (
+            reverse('admin:store_order_changelist')
+            + '?'
+            + urlencode({
+                'customer__id': str(customer.id)
+            })
+        )
+        return format_html(
+            '<a href="{}">{}</a>', url, customer
+        )
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
