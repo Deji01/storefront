@@ -5,6 +5,7 @@ from django.utils.http import urlencode
 from django.urls import reverse
 from . import models
 
+
 class InventoryFilter(admin.SimpleListFilter):
     title = 'inventory'
     parameter_name = 'inventory'
@@ -17,6 +18,7 @@ class InventoryFilter(admin.SimpleListFilter):
     def queryset(self, request, queryset):
         if self.value() == '<10':
             return queryset.filter(inventory__lt=10)
+
 
 @admin.register(models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
@@ -37,14 +39,15 @@ class CollectionAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(
-            products_count = Count('product')
+            products_count=Count('product')
         )
+
 
 @admin.register(models.Customer)
 class CustomerAdmin(admin.ModelAdmin):
     search_fields = ['first_name__istartswith', 'last_name__istartswith']
     list_display = ['first_name', 'last_name', 'membership']
-    list_editable = ['memebership']
+    list_editable = ['membership']
     list_per_page = 10
     ordering = ['first_name', 'last_name']
 
@@ -61,35 +64,37 @@ class CustomerAdmin(admin.ModelAdmin):
             '<a href="{}">{}</a>', url, customer
         )
 
+
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     actions = ['clear_inventory']
     autocomplete_fields = ['collection']
+    search_fields = ['collection']
     list_display = ['title', 'unit_price', 'inventory_status', 'collection']
     list_editable = ['unit_price']
     list_filter = ['collection', 'last_update', InventoryFilter]
     list_per_page = 10
     list_select_related = ['collection']
     prepopulated_fields = {
-        'slug' : ['title']
+        'slug': ['title']
     }
 
     @admin.display(ordering='inventory')
     def inventory_status(self, product):
         if product.inventory < 10:
             return 'Low'
-        return 'Ok'    
+        return 'Ok'
 
     @admin.action(description='Clear Inventory')
     def clear_inventory(self, request, queryset):
         updated_count = queryset.update(inventory=0)
         self.message_user(
-            request, 
+            request,
             f'{updated_count} products were successfully updated', messages.ERROR
         )
+
 
 @admin.register(models.Order)
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['id', 'placed_at', 'customer']
     autocomplete_fields = ['customer']
-
