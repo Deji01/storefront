@@ -23,6 +23,8 @@ class InventoryFilter(admin.SimpleListFilter):
 @admin.register(models.Collection)
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ['title', 'products_count']
+    search_fields = ['collection']
+
 
     @admin.display(ordering='products_count')
     def products_count(self, collection):
@@ -69,7 +71,6 @@ class CustomerAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     actions = ['clear_inventory']
     autocomplete_fields = ['collection']
-    search_fields = ['collection']
     list_display = ['title', 'unit_price', 'inventory_status', 'collection']
     list_editable = ['unit_price']
     list_filter = ['collection', 'last_update', InventoryFilter]
