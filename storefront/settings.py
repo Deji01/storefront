@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'storefront',
         'HOST': 'localhost',
         'USER': 'root',
-        'PASSWORD': os.environ('PASS')
+        'PASSWORD': os.environ['PASS']
     }
 }
 
