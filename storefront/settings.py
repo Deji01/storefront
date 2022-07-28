@@ -141,8 +141,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-INTERNAL_IPS = [
-    # ....
-    '127.0.0.1'
-    # ....
-]
+# INTERNAL_IPS = [
+#     # ....
+#     '127.0.0.1'
+#     # ....
+# ]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.mydomain.com',
+    'https://*.127.0.0.1',
+    'https://deji01-storefront-q7p7w7r69f65qq-8000.githubpreview.dev',
+    'https://deji01-storefront-*.githubpreview.dev'
+    ]
