@@ -155,3 +155,7 @@ CSRF_TRUSTED_ORIGINS = [
     'https://deji01-storefront-q7p7w7r69f65qq-8000.githubpreview.dev',
     'https://deji01-storefront-*.githubpreview.dev'
     ]
+
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False
+}
