@@ -6,9 +6,13 @@ from .models import Product
 from .serializers import ProductSerializer
 
 @api_view()
+def collection_detail(request, pk):
+    return Response('ok')
+
+@api_view()
 def product_list(request):
     queryset = Product.objects.select_related('collection').all()
-    serializer = ProductSerializer(queryset, many=True)
+    serializer = ProductSerializer(queryset, many=True, context={'request':request})
     return Response(serializer.data)
 
 @api_view()
