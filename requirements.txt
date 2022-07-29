@@ -1,4 +1,5 @@
 django
 django-debug-toolbar
+djangorestframework
 mysqlclient
 #sudo apt install mysql-client-core-8.0
