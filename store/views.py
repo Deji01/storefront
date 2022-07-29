@@ -19,6 +19,8 @@ def product_list(request):
         serializer =ProductSerializer(
             data=request.data
         )
+        serializer.is_valid(raise_exception=True)
+        print(serializer.data)
         return Response('ok')
 @api_view()
 def product_detail(request, id):
