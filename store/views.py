@@ -6,12 +6,18 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from store.filters import ProductFilter
 from .models import Cart, Collection, OrderItem, Product, Review
-from .serializers import CartSerializer, CollectionSerializer, ProductSerializer, ReviewSerializer
+from .serializers import CartItemSerializer, CartSerializer, CollectionSerializer, ProductSerializer, ReviewSerializer
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
 class CartViewSet(CreateModelMixin, DestroyModelMixin, GenericViewSet):
     queryset = Cart.objects.prefetch_related('items__product').all()
     serializer_class = CartSerializer
+
+class CartItemViewSet(ModelViewSet):
+    serializer_class = CartItemSerializer
+
+    def get_queryset(self):
+        return Cart.objects.filter(cart_id=self.kwargs['cart_pk']).select_related('product')
 
 class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
