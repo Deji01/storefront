@@ -10,9 +10,9 @@ from .serializers import CartSerializer, CollectionSerializer, ProductSerializer
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
 class CartViewSet(CreateModelMixin, GenericViewSet):
-    queryset = Cart.objects.all()
+    queryset = Cart.objects.prefetch_related('items__product').all()
     serializer_class = CartSerializer
-    
+
 class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
