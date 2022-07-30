@@ -9,13 +9,15 @@ from .models import Cart, Collection, OrderItem, Product, Review
 from .serializers import AddCartItemSerializer, CartItemSerializer, CartSerializer, CollectionSerializer, ProductSerializer, ReviewSerializer, UpdateCartItemSerializer
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
+
 class CartViewSet(CreateModelMixin, DestroyModelMixin, GenericViewSet):
     queryset = Cart.objects.prefetch_related('items__product').all()
     serializer_class = CartSerializer
 
+
 class CartItemViewSet(ModelViewSet):
-    http_method_names  ['get', 'post', 'patch', 'delete']
-    
+    http_method_names = ['get', 'post', 'patch', 'delete']
+
     def get_serializer_class(self):
         if self.request.method == 'POST':
             return AddCartItemSerializer
@@ -24,10 +26,11 @@ class CartItemViewSet(ModelViewSet):
         return CartItemSerializer
 
     def get_serializer_context(self):
-        return {'cart_id' : self.kwargs['cart_pk']}
+        return {'cart_id': self.kwargs['cart_pk']}
 
     def get_queryset(self):
         return Cart.objects.filter(cart_id=self.kwargs['cart_pk']).select_related('product')
+
 
 class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
@@ -58,9 +61,10 @@ class CollectionViewSet(ModelViewSet):
 
         return super().destroy(request, *args, **kwargs)
 
+
 class ReviewViewSet(ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
 
     def get_serializer_context(self):
-        return Review.objects.filter(product_id = self.kwargs['product_pk'])
+        return Review.objects.filter(product_id=self.kwargs['product_pk'])
