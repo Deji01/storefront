@@ -28,3 +28,15 @@ docker run -d -p 6379:6379
 ```bash
 celery -A storefront worker --loglevel=info
 ```
+## Schedule periodic celery tasks
+```bash
+celery -A storefront beat 
+```
+## Monitor celery tasks
+```bash
+celery -A storefront flower 
+```
+## Access Flower Admin Panel
+```bash
+localhost:5555
+```
