@@ -190,3 +190,10 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:8001',
     'https://deji01-storefront-q7p7w7r69f65qq-8000.githubpreview.dev',
 ]
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'localhost'
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_PORT = 2525
+DEFAULT_FROM_EMAIL = 'from@dejibuy.com'
