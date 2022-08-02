@@ -66,7 +66,7 @@ MIDDLEWARE = [
 
 if DEBUG:
     MIDDLEWARE += ['silk.middleware.SilkyMiddleware']
-    
+
 ROOT_URLCONF = 'storefront.urls'
 
 TEMPLATES = [
@@ -210,5 +210,15 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'playground.tasks.notify_customers',
         'schedule': 5,
         'args': ['Hello World']
+    }
+}
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
     }
 }
