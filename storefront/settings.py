@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'djoser',
+    'silk',
     'storefront',
     'playground',
     'debug_toolbar',
@@ -63,6 +64,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+if DEBUG:
+    MIDDLEWARE += ['silk.middleware.SilkyMiddleware']
+    
 ROOT_URLCONF = 'storefront.urls'
 
 TEMPLATES = [
