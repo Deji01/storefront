@@ -66,11 +66,20 @@ class CustomerAdmin(admin.ModelAdmin):
             '<a href="{}">{}</a>', url, customer
         )
 
+class ProductImageInline(admin.TabularInline):
+    model = models.ProductImage
+    readonly_fields = ['thumbnail']
+
+    def thumbnail(self, instance):
+        if instance.image.name != '':
+            return format_html(f'<img src="{instance.image.url}" class="thumbnail"/>')
+        return ''
 
 @admin.register(models.Product)
 class ProductAdmin(admin.ModelAdmin):
     actions = ['clear_inventory']
     autocomplete_fields = ['collection']
+    inlines = [ProductImageInline]
     list_display = ['title', 'unit_price', 'inventory_status', 'collection']
     list_editable = ['unit_price']
     list_filter = ['collection', 'last_update', InventoryFilter]
@@ -95,6 +104,11 @@ class ProductAdmin(admin.ModelAdmin):
             f'{updated_count} products were successfully updated', messages.ERROR
         )
 
+    class Media:
+        css = {
+            'all': ['store/styles.css']
+        }
+
 
 class OrderItemInline(admin.TabularInline):
     autocomplete_fields = ['product']
@@ -108,3 +122,4 @@ class OrderAdmin(admin.ModelAdmin):
     autocomplete_fields = ['customer']
     inlines = [OrderItemInline]
     list_display = ['id', 'placed_at', 'customer']
+
