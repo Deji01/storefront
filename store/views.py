@@ -42,7 +42,7 @@ class ProductViewSet(ModelViewSet):
     filter_class = ProductFilter
     ordering_field = ['unit_price', 'last_update']
     search_fields = ['title', 'description']
-    queryset = Product.objects.all()
+    queryset = Product.objects.prefetch_related('images').all()
     permission_classes = [IsAdminOrReadOnly]
 
     def get_serializer_context(self):
