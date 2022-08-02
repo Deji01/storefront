@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from store.filters import ProductFilter
 from store.permissions import IsAdminOrReadOnly
-from .models import Cart, Collection, Customer, Order, OrderItem, Product, Review
-from .serializers import AddCartItemSerializer, CartItemSerializer, CartSerializer, CollectionSerializer, CreateOrderSerializer, CustomerSerializer, OrderSerializer, ProductSerializer, ReviewSerializer, UpdateCartItemSerializer, UpdateOrderSerializer
+from .models import Cart, Collection, Customer, Order, OrderItem, Product, ProductImage, Review
+from .serializers import AddCartItemSerializer, CartItemSerializer, CartSerializer, CollectionSerializer, CreateOrderSerializer, CustomerSerializer, OrderSerializer, ProductImageSerializer, ProductSerializer, ReviewSerializer, UpdateCartItemSerializer, UpdateOrderSerializer
 from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
@@ -128,4 +128,11 @@ class OrderViewSet(ModelViewSet):
         return OrderSerializer
         return super().get_serializer_class()
 
+class ProductImageViewSet(ModelViewSet):
+    serializer_class = ProductImageSerializer
 
+    def get_queryset(self):
+        return ProductImage.objects.filter(product_id=self.kwargs['product_pk'])
+
+    def get_serializer_class(self):
+        return {'product_id': self.kwargs['product_pk']}
