@@ -16,3 +16,4 @@ redis==4.3.4
 # --dev pytest-watch==4.2.0
 # --dev model_bakery=1.6.0
 # --dev locust==2.10.1
+# --dev django-silk==5.0.1
