@@ -1,8 +1,10 @@
+from statistics import mode
 from django.db import models
 from django.conf import settings
 from uuid import uuid4
 from django.core.validators import MinValueValidator
 from django.contrib import admin
+from store.validators import validate_file_size
 
 class Collection(models.Model):
     title = models.CharField(max_length=255)
@@ -125,3 +127,6 @@ class Review(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images', validators=[validate_file_size])
