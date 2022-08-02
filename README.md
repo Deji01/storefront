@@ -11,3 +11,12 @@ mysql -u root -p
 ```bash
 python manage.py seed_db
 ```
+
+## Setup Fake SMTP Server
+```bash
+docker run --rm -it -p 3000:80 -p 2525:25 rnwood/smtp4dev
+```
+### SMTP Admin Panel
+```bash
+localhost:3000
+```
