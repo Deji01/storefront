@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.core.mail import EmailMessage, BadHeaderError
-from .tasks import notify_customers
+import requests
+
 # Create your views here.
 def say_hello(request):
-    notify_customers.delay('Hello')
+    requests.get('https://httpbin.org/delay/2')
     return render(request, 'hello.html', {'name': 'Ayodeji'})
