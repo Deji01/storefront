@@ -8,3 +8,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = False
 
 ALLOWED_HOSTS = ['dejibuy-prod.herokuapp.com']
+
+DATABASES = {
+    'default': 
+}
