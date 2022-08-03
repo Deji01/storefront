@@ -180,7 +180,6 @@ CORS_ALLOWED_ORIGINS = [
 # EMAIL_PORT = 2525
 # DEFAULT_FROM_EMAIL = 'from@dejibuy.com'
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/1'
 
 # from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
@@ -188,16 +187,6 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'playground.tasks.notify_customers',
         'schedule': 5,
         'args': ['Hello World']
-    }
-}
-
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
     }
 }
 

@@ -16,10 +16,22 @@ DATABASES = {
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'sql8509443',
-#         'HOST': 'sql8.freemysqlhosting.net',
-#         'USER': 'sql8509443',
+#         'NAME': '',
+#         'HOST': '',
+#         'USER': '',
 #         'PORT': 3306,
-#         'PASSWORD': os.environ['PASS']
+#         'PASSWORD': os.environ['PASSWORD']
 #     }
 # }
+
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/1'
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
