@@ -1,4 +1,5 @@
 from .common import *
+import dj_database_url
 import os 
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -10,5 +11,5 @@ DEBUG = False
 ALLOWED_HOSTS = ['dejibuy-prod.herokuapp.com']
 
 DATABASES = {
-    'default': 
+    'default': dj_database_url.config()
 }
