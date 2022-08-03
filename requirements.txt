@@ -12,9 +12,9 @@ djangorestframework-simplejwt==4.8.0
 Pillow==9.2.0
 redis==4.3.4
 whitenoise==6.2.0
+django-silk==5.0.1
 # --dev pytest==7.1.2
 # --dev pytest-django==4.5.2
 # --dev pytest-watch==4.2.0
 # --dev model_bakery=1.6.0
 # --dev locust==2.10.1
-# --dev django-silk==5.0.1
