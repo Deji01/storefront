@@ -14,6 +14,7 @@ class HelloView(APIView):
             response = requests.get('https://httpbin.org/delay/2')
             logger.info('Received the response')
             data =response.json()
+            return render(request, 'hello.html', {'name': data})
         except requests.ConnectionError:
             logger.critical('httpbin is offline')
-        return render(request, 'hello.html', {'name': data})
+        
