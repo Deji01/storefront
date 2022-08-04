@@ -167,12 +167,6 @@ MEDIA_URL ='/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8001',
-    'http://127.0.0.1:8001',
-    'https://deji01-storefront-q7p7w7r69f65qq-8000.githubpreview.dev',
-]
-
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'localhost'
 # EMAIL_HOST_USER = ''

@@ -24,6 +24,12 @@ DATABASES = {
 #     }
 # }
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8001',
+    'http://127.0.0.1:8001',
+    'https://deji01-storefront-q7p7w7r69f65qq-8000.githubpreview.dev',
+]
+
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/1'
 
 CACHES = {
