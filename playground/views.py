@@ -8,13 +8,16 @@ import logging
 
 logger = logging.getLogger(__name__)
 class HelloView(APIView):
+    @method_decorator(cache_page(5 * 60))
     def say_hello(self, request):
         try:
+            key = 'httpbin-result'
             logger.info('Calling httpbin')
             response = requests.get('https://httpbin.org/delay/2')
             logger.info('Received the response')
             data =response.json()
-            return render(request, 'hello.html', {'name': data})
+            cache.set(key, data)
+            return render(request, 'hello.html', {'name': cache.get(key)})      
         except requests.ConnectionError:
             logger.critical('httpbin is offline')
-        
+        return render(request, 'hello.html', {'name': data})
