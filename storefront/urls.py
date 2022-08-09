@@ -22,6 +22,9 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+admin.site.site_header = 'StoreFront Admin'
+admin.site.index_title = 'Admin'
+
 schema_view = get_schema_view(
    openapi.Info(
       title="Storefront API",
@@ -35,19 +38,19 @@ schema_view = get_schema_view(
    permission_classes=[permissions.AllowAny],
 )
 
-
-admin.site.site_header = 'StoreFront Admin'
-admin.site.index_title = 'Admin'
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('playground/', include('playground.urls')),
-    path('store/', include('store.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
-    path('', include('core.urls')),
-    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('api/v1/',
+    include([
+        path('playground/', include('playground.urls')),
+        path('store/', include('store.urls')),
+        path('auth/', include('djoser.urls')),
+        path('auth/', include('djoser.urls.jwt')),
+        path('', include('core.urls')),
+        path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+        ]) 
+    )
 ]
 
 if settings.DEBUG:

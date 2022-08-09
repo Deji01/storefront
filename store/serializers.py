@@ -166,7 +166,6 @@ class CreateOrderSerializer(serializers.ModelSerializer):
             order_created.send_robust(self.__class__, order=order)
             return order
 
-
 class UpdateOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
