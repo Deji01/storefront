@@ -41,12 +41,12 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/', include(debug_toolbar.urls)),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.jwt')),
     path('api/v1/',
     include([
         path('playground/', include('playground.urls')),
         path('store/', include('store.urls')),
-        path('auth/', include('djoser.urls')),
-        path('auth/', include('djoser.urls.jwt')),
         path('', include('core.urls')),
         path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
         ]) 
