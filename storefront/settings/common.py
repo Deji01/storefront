@@ -38,13 +38,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'djoser',
     'silk',
-    'storefront',
-    'playground',
     'debug_toolbar',
-    'store',
-    'tags',
-    'likes',
-    'core'
+    'storefront',
+    'playground.apps.PlaygroundConfig',
+    'store.apps.StoreConfig',
+    'tags.apps.TagsConfig',
+    'likes.apps.LikesConfig',
+    'core.apps.CoreConfig'
 ]
 
 MIDDLEWARE = [
