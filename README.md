@@ -1,3 +1,5 @@
+[![Django CI](https://github.com/Deji01/storefront/actions/workflows/django.yml/badge.svg)](https://github.com/Deji01/storefront/actions/workflows/django.yml)
+
 # Storefront
 Storefront is an E-Commerce web application built using Django web framework and MySQL database.
 
